@@ -1,17 +1,14 @@
-### Ruby on Rails template project
+# README
 
-This project is based on a GitLab [Project Template](https://docs.gitlab.com/ee/gitlab-basics/create-project.html).
+# Ruby version
+``` ruby:2.6-buster ```
 
-Improvements can be proposed in the [original project](https://gitlab.com/gitlab-org/project-templates/rails).
+# How to start
 
-### CI/CD with Auto DevOps
+``` docker-compose up --build ```
 
-This template is compatible with [Auto DevOps](https://docs.gitlab.com/ee/topics/autodevops/).
+# How to run the test suite
 
-If Auto DevOps is not already enabled for this project, you can [turn it on](https://docs.gitlab.com/ee/topics/autodevops/#enabling-auto-devops) in the project settings.
+if using docker
+``` docker-compose run web bundle exec rspec -f d ```
 
-### Developing with Gitpod
-
-This template has a fully-automated dev setup for [Gitpod](https://docs.gitlab.com/ee/integration/gitpod.html).
-
-If you open this project in Gitpod, you'll get all dependencies pre-installed and Rails server will open a web preview.
