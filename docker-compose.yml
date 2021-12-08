@@ -11,7 +11,7 @@ services:
       - db
 
   db:
-    image: postgres
+    image: postgres:14.1-bullseye
     volumes:
       - ./tmp/db:/var/lib/postgresql/data
     ports:
@@ -20,6 +20,6 @@ services:
       POSTGRES_PASSWORD: password
 
   redis:
-     image: redis
+     image: redis:6.2.6-bullseye
      ports:
        - '6379:6379'
