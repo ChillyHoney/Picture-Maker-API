@@ -6,7 +6,9 @@
 # How to start project first time
 
 ``` docker-compose up --build ```
+
 ``` docker-compose run web rails db:create ```
+
 ``` docker-compose run web rails db:migrate ```
 
 # How to start docker
