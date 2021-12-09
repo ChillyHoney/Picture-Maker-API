@@ -7,7 +7,7 @@ RSpec.describe "Session", :type => :request do
 		@sign_in_url = '/api/v1/auth/sign_in' 
 		@sign_out_url = '/api/v1/auth/sign_out'
 		@login_params = {
-				email: @user.email,
+				username: @user.username,
 				password: @user.password
 		}
 	end
