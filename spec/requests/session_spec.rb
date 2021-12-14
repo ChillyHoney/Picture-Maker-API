@@ -4,10 +4,11 @@ RSpec.describe "Session", :type => :request do
 
 	before(:each) do
 		@user =  FactoryBot.create(:user) 
+		@user.confirm
 		@sign_in_url = '/api/v1/auth/sign_in' 
 		@sign_out_url = '/api/v1/auth/sign_out'
 		@login_params = {
-				email: @user.email,
+				username: @user.username,
 				password: @user.password
 		}
 	end
@@ -53,7 +54,7 @@ RSpec.describe "Session", :type => :request do
 	describe 'DELETE /api/v1/auth/sign_out' do
 		
 		before do
-			#login @user created in the beore block in outer describe block
+			#login @user created in the before block in outer describe block
 			post @sign_in_url, params: @login_params, as: :json
 			@headers = {
 				'uid' => response.headers['uid'],
