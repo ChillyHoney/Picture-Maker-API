@@ -11,6 +11,5 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
 
   validates :username, presence: true, length: {minimum:3, maximum:26},
-            uniqueness: true
-
+            uniqueness: { case_sensitive: false }
 end

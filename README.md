@@ -11,9 +11,17 @@
 
 ``` docker-compose run web rails db:migrate ```
 
+Pendning migrations problems?
+
+``` docker-compose run web rails db:test:prepare ```
+
 # How to start docker
 
 ``` docker-compose up --build ```
+
+And how to stop docker:
+
+``` docker-compose stop ```
 
 # How to run the test suite
 
