@@ -40,6 +40,7 @@ group :test do
   gem 'factory_bot_rails'
   gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
   gem 'database_cleaner'
+  gem 'email_spec'
 end
 
 group :development do

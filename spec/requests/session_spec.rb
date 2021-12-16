@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe "Session", :type => :request do
-
 	before(:each) do
 		@user =  FactoryBot.create(:user) 
 		@user.confirm
