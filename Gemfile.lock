@@ -137,6 +137,9 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise_security_extension (0.9.2)
+      devise (>= 2.0.0)
+      rails (>= 3.1.1)
     devise_token_auth (1.2.0)
       bcrypt (~> 3.0)
       devise (> 3.5.2, < 5)
@@ -253,6 +256,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
   database_cleaner
+  devise_security_extension
   devise_token_auth
   email_spec
   factory_bot_rails
