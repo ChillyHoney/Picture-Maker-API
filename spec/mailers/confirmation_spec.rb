@@ -10,8 +10,8 @@ RSpec.describe "Confirmation", :type => :mailer do
     context 'when signup params is valid -' do
       before do
         @user = FactoryBot.create(:user)
-          @email = @user.send_confirmation_instructions
-        end
+        @email = @user.send_confirmation_instructions
+      end
 
       it "should save a user" do
         expect(@user).to be_valid
