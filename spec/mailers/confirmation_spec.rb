@@ -45,7 +45,6 @@ RSpec.describe "Confirmation", :type => :mailer do
       it 'should contain a link to the confirmation link' do
         expect(@email).to have_body_text(/confirmation_token=#{@user.confirmation_token}/)
       end
-
 		end
 	end
 end 
