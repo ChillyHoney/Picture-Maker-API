@@ -1,0 +1,23 @@
+#https://github.com/svenfuchs/rails-i18n/blob/master/rails/locale/pl.yml
+#https://github.com/tigrish/devise-i18n/blob/master/rails/locales/pl.yml
+pl:
+  activerecord:
+    attributes:
+      user:
+        username: Nazwa użytkownika      
+    errors:
+      models:
+        user:
+         attributes:
+          username:
+            too_short: jest za krótka (przynajmniej %{count} znaki)
+            blank: nie może być pusta
+
+      format: "%{attribute} %{message}"
+      messages:      
+        taken: został już zajęty
+        invalid_password: nie może zawierać spacji (użyj '_' lub '-')
+        invalid_username: nie może zawierać znaków specjalnych 
+  devise_token_auth:
+    confirmations:
+      sended: W przeciągu kilku minut otrzymasz email z załącznikiem aktywacyjnym.

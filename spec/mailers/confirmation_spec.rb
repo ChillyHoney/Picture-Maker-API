@@ -35,15 +35,15 @@ RSpec.describe "Confirmation", :type => :mailer do
       end
 
       it 'should have the correct subject' do
-        expect(@email).to have_subject('Confirmation instructions')
+        expect(@email).to have_subject('Instrukcja potwierdzania')
       end
 
       it "should contain the proper body text" do
-        expect(@email).to have_body_text(/Welcome #{@user.email}!/)
+        expect(@email).to have_body_text(/Witaj #{@user.email}!/)
       end
 
       it 'should contain a link to the confirmation link' do
-        expect(@email).to have_body_text(/confirmation_token=#{@user.confirmation_token}&/)
+        expect(@email).to have_body_text(/confirmation_token=#{@user.confirmation_token}/)
       end
 
 		end
