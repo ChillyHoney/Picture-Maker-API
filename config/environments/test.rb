@@ -7,7 +7,7 @@ require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-
+  config.action_mailer.default_url_options = { :host => 'localhost:3002' }
   config.cache_classes = false
   config.action_view.cache_template_loading = true
 
@@ -43,8 +43,12 @@ Rails.application.configure do
   # ActionMailer::Base.deliveries array.
   config.action_mailer.delivery_method = :test
 
+  # This line let us to use expect(...).to have_enqueued_job.on_queue('mailers') 
+  config.active_job.queue_adapter = :test
+
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
+  # config.active_support.deprecation = :log
 
   # Raise exceptions for disallowed deprecations.
   config.active_support.disallowed_deprecation = :raise
