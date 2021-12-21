@@ -31,3 +31,9 @@ Using docker
 Using locally
 ``` bundle exec rspec -f d ```
 
+# How to confirm new user by email
+
+Drag and drop rich.html to the internet browser to see an verification email
+``` tmp\letter_opener\long-string\rich.html ```
+
+
