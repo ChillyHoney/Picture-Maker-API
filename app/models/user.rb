@@ -15,6 +15,9 @@ class User < ActiveRecord::Base
   validate :password_complexity
 
   has_many_attached :pictures
+  validates :pictures, content_type: ['image/png', 'image/jpg', 'image/jpeg'],
+                      size: { less_than: 5.megabytes , message: 'is not given between size' }
+#need to add here i18n
 
   def password_complexity
     return if password.blank? || password =~ /^((?!.*[\s]))/

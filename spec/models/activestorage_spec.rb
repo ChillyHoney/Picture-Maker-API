@@ -14,6 +14,7 @@ RSpec.describe User, :type => :model do
         expect(@user.pictures).to be_attached
       end
 
+
     end
   end
 end
