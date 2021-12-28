@@ -25,9 +25,10 @@ RSpec.configure do |config|
     #     # => "be bigger than 2 and smaller than 4"
     # ...rather than:
     #     # => "be bigger than 2"
+    require 'active_storage_validations/matchers'
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
   end
-
+  config.include ActiveStorageValidations::Matchers
   # rspec-mocks config goes here. You can use an alternate test double
   # library (such as bogus or mocha) by changing the `mock_with` option here.
   config.mock_with :rspec do |mocks|

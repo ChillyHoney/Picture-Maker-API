@@ -17,7 +17,6 @@ class User < ActiveRecord::Base
   has_many_attached :pictures
   validates :pictures, content_type: ['image/png', 'image/jpg', 'image/jpeg'],
                       size: { less_than: 5.megabytes , message: :invalid_size }
-#need to add here i18n
 
   def password_complexity
     return if password.blank? || password =~ /^((?!.*[\s]))/
