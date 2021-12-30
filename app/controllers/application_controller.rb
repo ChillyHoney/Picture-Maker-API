@@ -5,7 +5,7 @@ class ApplicationController < ActionController::API
 
    protected
       def configure_permitted_parameters        
-        devise_parameter_sanitizer.permit(:account_update, keys: [:pictures])
+        devise_parameter_sanitizer.permit(:account_update, keys: [:pictures, :username, :email])
       end
 
 end
