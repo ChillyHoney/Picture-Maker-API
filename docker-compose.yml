@@ -9,6 +9,8 @@ services:
       - "3002:3000"
     depends_on:
       - db
+    stdin_open: true
+    tty: true
 
   db:
     image: postgres:14.1-bullseye
