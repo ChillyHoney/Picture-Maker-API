@@ -54,14 +54,14 @@ RSpec.describe "Session", :type => :request do
 		end
 	end
 
-	describe 'DELETE /api/v1/auth/sign_out' do		
-		before do			
+	describe 'DELETE /api/v1/auth/sign_out' do
+		before do
 			post @sign_in_url, params: @login_params, as: :json
-			 @headers = {
+			@headers = {
       'access-token' => response.headers['access-token'],
       'client' => response.headers['client'],
       'uid' => response.headers['uid']
-    }
+      }
 		end
 
 		it 'returns status 200' do
@@ -91,7 +91,7 @@ RSpec.describe "Session", :type => :request do
 	  end
 
     it "when can't find user" do
-	  	patch @update_url, params: @update_params	  
+	  	patch @update_url, params: @update_params
 	  	expect(response).to have_http_status(:not_found)
 	  end
   end

@@ -4,15 +4,13 @@ class Api::V1::PicturesController < ApplicationController
   before_action :set_attachment, only: [:destroy]
 
   def show
-    url = []
-    current_api_user.pictures.map do |picture|
-      url.push(rails_blob_url(picture)) if current_api_user.pictures.attached?
+    pictures = current_api_user.pictures.map do |p|
+      { id: p.id, filename: p.filename, url: rails_blob_url(p) }
     end
-
-    render json: url.reverse if current_api_user.pictures.count == url.count
+    render json: pictures.reverse
   end
 
-  def create    
+  def create
     current_api_user.pictures.attach(file_params)
 
     json_data = [data = current_api_user.pictures.last, rails_blob_url(data)]
@@ -25,6 +23,7 @@ class Api::V1::PicturesController < ApplicationController
   
   private
   def set_attachment
+    params.require(:id)
     @attachment = ActiveStorage::Attachment.find(params[:id])
   end
 

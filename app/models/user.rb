@@ -7,11 +7,10 @@ class User < ActiveRecord::Base
   # :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
         :recoverable, :rememberable, :validatable, :confirmable
-  include DeviseTokenAuth::Concerns::User
-  include Rails.application.routes.url_helpers
+  include DeviseTokenAuth::Concerns::User  
 
   VALID_USERNAME_REGEX= /^(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/ix
-  validates :username, presence: true, length: {minimum:3, maximum:26},
+  validates :username, presence: true, length: { minimum: 3, maximum: 26 },
             format: { with: VALID_USERNAME_REGEX, :multiline => true,
             message: :invalid_username }
   validate :password_complexity
