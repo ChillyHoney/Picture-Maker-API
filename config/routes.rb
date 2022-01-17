@@ -6,7 +6,7 @@ Rails.application.routes.draw do
       }
     end
     namespace :v1 do
-      resources :pictures, only: [:create, :index, :show]
+      resources :pictures, only: [:create, :show, :destroy]
     end
   end
 end

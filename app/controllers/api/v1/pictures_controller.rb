@@ -1,11 +1,7 @@
 class Api::V1::PicturesController < ApplicationController
   include Rails.application.routes.url_helpers
   before_action :authenticate_api_user!
-
-  def index
-    # signed_id = current_api_user.pictures.last.signed_id
-    # url = url_for(current_api_user.pictures.last) if current_api_user.pictures.attached?
-  end
+  before_action :set_attachment, only: [:destroy]
 
   def show
     url = []
@@ -16,8 +12,23 @@ class Api::V1::PicturesController < ApplicationController
     render json: url.reverse if current_api_user.pictures.count == url.count
   end
 
-  def create
-    current_api_user.pictures.attach(params[:file])
+  def create    
+    current_api_user.pictures.attach(file_params)
+
+    json_data = [data = current_api_user.pictures.last, rails_blob_url(data)]
+    render json: json_data
   end
 
+  def destroy
+    @attachment.purge_later
+  end
+  
+  private
+  def set_attachment
+    @attachment = ActiveStorage::Attachment.find(params[:id])
+  end
+
+  def file_params
+    params.require(:file)
+  end
 end
