@@ -9,7 +9,7 @@ WORKDIR /usr/src/app
 
 # Set the gemfile and install
 COPY Gemfile* ./
-RUN bundle install
+RUN bundle install --jobs 20 --retry 5
 
 # Copy the main application.
 COPY . ./

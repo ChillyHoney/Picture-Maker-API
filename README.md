@@ -28,6 +28,9 @@ And how to stop docker:
 Using docker
 ``` docker compose run web bundle exec rspec -f d ```
 
+to run specific test use test path and line of the code at the end - e.g.
+``` docker compose run web bundle exec rspec spec/requests/session_spec.rb:88 ```
+
 Using locally
 ``` bundle exec rspec -f d ```
 

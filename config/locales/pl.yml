@@ -21,3 +21,25 @@ pl:
   devise_token_auth:
     confirmations:
       sended: W przeciągu kilku minut otrzymasz email z załącznikiem aktywacyjnym.
+  erros:
+    messages:
+      content_type_invalid: "ma niepoprawne rozszerzenie"
+      file_size_out_of_range: "rozmiar %{file_size} nie mieści się w wymaganym zakresie"
+      limit_out_of_range: "liczba całkowita jest poza zakresem"
+      image_metadata_missing: "jest niepoprawny"
+      dimension_min_inclusion: "musi być większe lub równe %{szerokość} x %{wysokość} pikseli."
+      dimension_max_inclusion: "musi być mniejsze lub równe %{szerokość} x %{wysokość} pikseli."
+      dimension_width_inclusion: "nie jest zawarte pomiędzy %{min} i %{max} pikseli szerokości."
+      dimension_height_inclusion: "nie jest zawarte pomiędzy %{min} a %{max} pikseli wysokości."
+      dimension_width_greater_than_or_equal_to: "musi być większe lub równe %{length} pikseli szerokości."
+      dimension_height_greater_than_or_equal_to: "musi być większe lub równe %{length} pikseli wysokości."
+      dimension_width_less_than_or_equal_to: "musi być mniejsze lub równe %{length} pikseli szerokości."
+      dimension_height_less_than_or_equal_to: "musi być mniejsze lub równe %{length} pikseli wysokości."
+      dimension_width_equal_to: "musi być równe szerokości %{length} pikseli."
+      dimension_height_equal_to: "musi być równe wysokości %{length} pikseli."
+      aspect_ratio_not_square: "musi być obrazem kwadratowym"
+      aspect_ratio_not_portrait: "musi być obrazem portretowym"
+      aspect_ratio_not_landscape: "musi być obrazem krajobrazowym"
+      aspect_ratio_is_not: "musi mieć proporcje %{aspect_ratio}"
+      aspect_ratio_unknown: "ma nieznany typ proporcji"
+      invalid_size: "musi być mniesze niż "

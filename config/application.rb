@@ -46,7 +46,8 @@ module Src
         methods: [:get, :post, :options, :delete, :put, :patch]
       end
     end
-
+    Rails.application.routes.default_url_options = { host: "localhost", port: "3002" }
+    config.active_storage.replace_on_assign_to_many = false
     config.api_only = true
   end
 end
