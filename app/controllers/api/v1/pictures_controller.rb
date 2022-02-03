@@ -2,7 +2,7 @@ class Api::V1::PicturesController < ApplicationController
   include Rails.application.routes.url_helpers
   before_action :authenticate_api_user!
   before_action :set_attachment, only: [:destroy]
-  # after_action :change_filename, only: [:create]
+  after_action :change_filename, only: [:create]
 
   def index
     attachment_id = current_api_user.pictures.attachments.find(params[:id])
@@ -19,7 +19,7 @@ class Api::V1::PicturesController < ApplicationController
   end
 
   def create
-    filename = :filename
+    @new_filename = params[:filename]
     current_api_user.pictures.attach(file_params)
 
     json_data = [data = current_api_user.pictures.last, rails_blob_url(data)]
@@ -41,11 +41,9 @@ class Api::V1::PicturesController < ApplicationController
     params.require(:file)
   end
 
-  # def change_filename
-  #   current_api_user.pictures.attachments.last.id = :id
-  #   params.require(:id)
-
-  #   picture = current_api_user.pictures.attachments.findfind(params[:id])
-  #   picture.udpate(filename: "#{new_filename}#{picture.filename.extension_with_delimiter}")
-  # end
+  def change_filename
+    id = current_api_user.pictures.attachments.last.id
+    picture = current_api_user.pictures.attachments.find(id)
+    picture.update(filename: "#{@new_filename}#{picture.filename.extension_with_delimiter}")
+  end
 end
