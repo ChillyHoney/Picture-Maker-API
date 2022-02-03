@@ -8,7 +8,7 @@ class Api::V1::PicturesController < ApplicationController
     attachment_id = current_api_user.pictures.attachments.find(params[:id])
     url = rails_blob_url(attachment_id)
 
-    render json: {url: url, filename: attachment_id.filename }
+    render json: {url: url, filename: attachment_id.filename.base }
   end
 
   def show
