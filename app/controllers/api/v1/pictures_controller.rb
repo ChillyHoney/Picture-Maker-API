@@ -8,7 +8,10 @@ class Api::V1::PicturesController < ApplicationController
     attachment_id = current_api_user.pictures.attachments.find(params[:id])
     url = rails_blob_url(attachment_id)
 
-    render json: {url: url, filename: attachment_id.filename.base }
+    render json: {id: attachment_id.id ,
+                filename: attachment_id.filename.base,
+                description: attachment_id.description,
+                url: url}
   end
 
   def show
@@ -20,9 +23,12 @@ class Api::V1::PicturesController < ApplicationController
 
   def create
     @new_filename = params[:filename]
+    @description = params[:description]
     current_api_user.pictures.attach(file_params)
-
-    json_data = [data = current_api_user.pictures.last, rails_blob_url(data)]
+    picture_data = current_api_user.pictures.last
+    json_data = {id: picture_data.id,
+                filename: @new_filename,
+                url: rails_blob_url(picture_data)}
 
     render json: json_data
   end
@@ -42,8 +48,10 @@ class Api::V1::PicturesController < ApplicationController
   end
 
   def change_filename
-    id = current_api_user.pictures.attachments.last.id
-    picture = current_api_user.pictures.attachments.find(id)
-    picture.update(filename: "#{@new_filename}#{picture.filename.extension_with_delimiter}")
+    picture = current_api_user.pictures.attachments.last
+    picture.update(filename: "#{@new_filename}#{picture.filename.extension_with_delimiter}",
+                   description: "#{@description}")
+
+
   end
 end
