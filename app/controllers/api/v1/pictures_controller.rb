@@ -11,26 +11,31 @@ class Api::V1::PicturesController < ApplicationController
     render json: {id: attachment_id.id ,
                 filename: attachment_id.filename.base,
                 description: attachment_id.description,
+                created_at: attachment_id.created_at.strftime("%Y-%m-%d %H:%M"),
                 url: url}
   end
 
   def show
     pictures = current_api_user.pictures.map do |p|
-      { id: p.id, filename: p.filename, url: rails_blob_url(p) }
+      { id: p.id, filename: p.filename, type: p.content_type, url: rails_blob_url(p) }
     end
     render json: pictures.reverse
   end
 
   def create
-    @new_filename = params[:filename]
-    @description = params[:description]
-    current_api_user.pictures.attach(file_params)
-    picture_data = current_api_user.pictures.last
-    json_data = {id: picture_data.id,
-                filename: @new_filename,
-                url: rails_blob_url(picture_data)}
+    @new_filename = params[:filename].strip
+    @description = params[:description].strip
 
-    render json: json_data
+    if @new_filename.match(/([a-zA-Z]+)/) || @new_filename != ""
+      current_api_user.pictures.attach(file_params)
+      picture_data = current_api_user.pictures.last
+      json_data = {id: picture_data.id,
+                  filename: @new_filename,
+                  url: rails_blob_url(picture_data)}
+      render json: json_data, status: :created
+    else
+      render json: @resource, status: :unprocessable_entity
+    end
   end
 
   def destroy
@@ -49,9 +54,11 @@ class Api::V1::PicturesController < ApplicationController
 
   def change_filename
     picture = current_api_user.pictures.attachments.last
-    picture.update(filename: "#{@new_filename}#{picture.filename.extension_with_delimiter}",
-                   description: "#{@description}")
 
-
+    if @new_filename.match(/([a-zA-Z]+)/) || @new_filename != ""
+      picture.update(filename: "#{@new_filename}",
+                    description: "#{@description}")
+    end
   end
+
 end
