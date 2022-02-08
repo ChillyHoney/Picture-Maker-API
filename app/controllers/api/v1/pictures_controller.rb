@@ -3,7 +3,8 @@ class Api::V1::PicturesController < ApplicationController
   before_action :authenticate_api_user!
 
   def index
-    pictures = current_api_user.pictures.map do |p| {
+    pictures = current_api_user.pictures.with_attached_file.map do |p|
+    {
       id: p.id,
       filename: p.file.filename,
       type: p.file.content_type,
@@ -11,7 +12,6 @@ class Api::V1::PicturesController < ApplicationController
     }
     end
     render json: pictures.reverse
-
   end
 
   def show
@@ -28,20 +28,18 @@ class Api::V1::PicturesController < ApplicationController
   def create
     picture = Picture.new({:description => params[:description]})
     picture.file.attach(io: File.open(params.require(:file)), filename: params.require(:filename))
-    picture_data = current_api_user.pictures << picture
+    current_api_user.pictures << picture
 
     json_data = {
-      id: current_api_user.pictures.last.id,
-      filename: current_api_user.pictures.last.file.filename,
-      url: rails_blob_url(current_api_user.pictures.last.file),
+      id: picture.id,
+      filename: picture.file.filename,
+      url: rails_blob_url(picture.file),
     }
     render json: json_data, status: :created
   end
 
   def destroy
-    current_api_user.pictures.find(params[:id]).file.purge
-    current_api_user.pictures.find(params[:id]).delete
-
-    render status: :accepted
+    params.require(:id)
+    current_api_user.pictures.find(params[:id]).destroy
   end
 end
