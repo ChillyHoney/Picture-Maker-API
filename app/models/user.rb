@@ -15,10 +15,8 @@ class User < ActiveRecord::Base
             message: :invalid_username }
   validate :password_complexity
 
-  has_many_attached :pictures
-  validates :pictures, content_type: ['image/png', 'image/jpg', 'image/jpeg'],
-            size: { less_than: 5.megabytes , message: :invalid_size }
-
+  has_many :pictures
+  
   def password_complexity
     return if password.blank? || password =~ /^((?!.*[\s]))/
     errors.add :password, :invalid_password
