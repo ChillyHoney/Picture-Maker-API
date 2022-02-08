@@ -44,6 +44,10 @@ class Api::V1::PicturesController < ApplicationController
     current_api_user.pictures.find(params[:id]).update!(description: params[:description])
   end
 
+  def favourite
+
+  end
+
   def destroy
     params.require(:id)
     current_api_user.pictures.find(params[:id]).destroy
