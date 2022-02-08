@@ -8,6 +8,7 @@ class Api::V1::PicturesController < ApplicationController
     {
       id: p.id,
       filename: p.file.filename,
+      is_favourite: p.is_favourite,
       type: p.file.content_type,
       url: rails_blob_url(p.file)
     }
@@ -21,6 +22,7 @@ class Api::V1::PicturesController < ApplicationController
       id: picture_id.id ,
       filename: picture_id.file.filename.base,
       description: picture_id.description,
+      is_favourite: picture_id.is_favourite,
       created_at: picture_id.file.created_at.strftime("%Y-%m-%d %H:%M"),
       url: rails_blob_url(picture_id.file)
     }
@@ -34,6 +36,7 @@ class Api::V1::PicturesController < ApplicationController
     json_data = {
       id: picture.id,
       filename: picture.file.filename,
+      is_favourite: picture.is_favourite,
       url: rails_blob_url(picture.file),
     }
     render json: json_data, status: :created
@@ -46,7 +49,7 @@ class Api::V1::PicturesController < ApplicationController
 
   def favourite
     current_api_user.pictures.find(params[:id]).update!(is_favourite: !current_api_user.pictures.find(params[:id]).is_favourite)
-    render json: current_api_user.pictures.find(params[:id]).is_favourite
+    render json: { is_favourite: current_api_user.pictures.find(params[:id]).is_favourite }
   end
 
   def destroy
