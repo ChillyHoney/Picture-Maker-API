@@ -1,6 +1,7 @@
 class Api::V1::PicturesController < ApplicationController
   include Rails.application.routes.url_helpers
   before_action :authenticate_api_user!
+  before_action :id_require, only: [:update, :favourite, :destroy]
 
   def index
     pictures = current_api_user.pictures.with_attached_file.map do |p|
@@ -39,17 +40,21 @@ class Api::V1::PicturesController < ApplicationController
   end
 
   def update
-    params.require(:id)
     current_api_user.pictures.find(params[:id]).file.update!(filename: params.require(:filename))
     current_api_user.pictures.find(params[:id]).update!(description: params[:description])
   end
 
   def favourite
-
+    current_api_user.pictures.find(params[:id]).update!(is_favourite: !current_api_user.pictures.find(params[:id]).is_favourite)
+    render json: current_api_user.pictures.find(params[:id]).is_favourite
   end
 
   def destroy
-    params.require(:id)
     current_api_user.pictures.find(params[:id]).destroy
+  end
+
+  private
+  def id_require
+    params.require(:id)
   end
 end
