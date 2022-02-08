@@ -38,6 +38,12 @@ class Api::V1::PicturesController < ApplicationController
     render json: json_data, status: :created
   end
 
+  def update
+    params.require(:id)
+    current_api_user.pictures.find(params[:id]).file.update!(filename: params.require(:filename))
+    current_api_user.pictures.find(params[:id]).update!(description: params[:description])
+  end
+
   def destroy
     params.require(:id)
     current_api_user.pictures.find(params[:id]).destroy
