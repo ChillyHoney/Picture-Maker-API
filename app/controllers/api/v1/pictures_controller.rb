@@ -47,7 +47,6 @@ class Api::V1::PicturesController < ApplicationController
   end
 
   def update
-    params.require(:filename)
     @picture.update(params.require(:picture).permit(:is_favourite, :filename, :description))
   end
 
