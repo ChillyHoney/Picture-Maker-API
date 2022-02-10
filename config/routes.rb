@@ -7,7 +7,6 @@ Rails.application.routes.draw do
     end
     namespace :v1 do
       resources :pictures, only: [:create, :show, :destroy, :index, :update]
-      patch '/pictures/favourite/:id', to: 'pictures#favourite'
     end
   end
 end
