@@ -1,7 +1,7 @@
 class Api::V1::PicturesController < ApplicationController
   include Rails.application.routes.url_helpers
   before_action :authenticate_api_user!
-  before_action :find_picture, only: [:update, :favourite, :destroy, :show]
+  before_action :find_picture, only: [:update, :destroy, :show]
 
   def index
     pictures = current_api_user.pictures.with_attached_file.map do |p|
@@ -30,9 +30,9 @@ class Api::V1::PicturesController < ApplicationController
   def create
     picture = Picture.new(
       {
-        :description => params[:description],
-        :is_favourite => params[:is_favourite],
-        :filename => params.require(:filename)
+        description: params[:description],
+        is_favourite: params[:is_favourite],
+        filename: params.require(:filename)
       })
     picture.file.attach(params.require(:file))
     current_api_user.pictures << picture
