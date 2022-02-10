@@ -28,7 +28,12 @@ class Api::V1::PicturesController < ApplicationController
   end
 
   def create
-    picture = Picture.new({:description => params[:description], :is_favourite => params[:is_favourite], :filename => params.require(:filename)})
+    picture = Picture.new(
+      {
+        :description => params[:description],
+        :is_favourite => params[:is_favourite],
+        :filename => params.require(:filename)
+      })
     picture.file.attach(params.require(:file))
     current_api_user.pictures << picture
 
